@@ -8,169 +8,278 @@
     <title>CHAOS — Order Online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Poppins:wght@600;700;800&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet" />
     <style>
       :root {
         color-scheme: light;
-        --orange: #f26b30;
-        --orange-dark: #d14e16;
-        --ink: #1c1714;
-        --bg: #faf6f1;
-        --card: #ffffff;
-        --muted: #6f655c;
-        --line: #eadfd4;
-        --chip-bg: #ffffff;
-        --chip-ink: #4a3f36;
-        --green: #1faa55;
-        --green-dark: #128c43;
-        --blue: #0084ff;
-        --field-bg: #ffffff;
-        --danger: #d92d20;
-        --shadow: 0 6px 24px rgba(60, 30, 5, .10);
-        --bar-bg: #1c1714;
-        --bar-ink: #ffffff;
+        /* FoodDash Design System Colors */
+        --primary: #DC2626;
+        --primary-hover: #B91C1C;
+        --primary-light: #FEF2F2;
+        --secondary: #EA580C;
+        --secondary-light: #FFF7ED;
+        --tertiary: #16A34A;
+        --tertiary-hover: #15803D;
+        --tertiary-light: #DCFCE7;
+        --background: #F8F9FA;
+        --surface: #FFFFFF;
+        --text-primary: #171717;
+        --text-secondary: #525252;
+        --text-tertiary: #737373;
+        --line: #E5E5E5;
+        --line-subtle: #F3F4F6;
+        --success: #16A34A;
+        --warning: #D97706;
+        --error: #EF4444;
+        --info: #2563EB;
+
+        /* Radius (FoodDash spec) */
+        --radius-sm: 6px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-pill: 9999px;
+
+        /* Elevation (FoodDash spec) */
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+        --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+        --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.16);
+        --shadow-xl: 0 12px 32px rgba(0, 0, 0, 0.20);
+        --focus-ring: 0 0 0 3px rgba(220, 38, 38, 0.25);
+
+        /* Variable aliases */
+        --orange: var(--primary);
+        --orange-dark: var(--primary);
+        --ink: var(--text-primary);
+        --bg: var(--background);
+        --card: var(--surface);
+        --muted: var(--text-secondary);
+        --chip-bg: #F5F5F5;
+        --chip-ink: var(--text-primary);
+        --green: var(--tertiary);
+        --green-dark: var(--tertiary-hover);
+        --blue: var(--info);
+        --field-bg: #FFFFFF;
+        --danger: var(--error);
+        --shadow: var(--shadow-sm);
+        --bar-bg: #171717;
+        --bar-ink: #FFFFFF;
       }
       * { box-sizing: border-box; }
       html { scroll-behavior: smooth; }
       body {
         margin: 0;
-        font-family: "Archivo", system-ui, -apple-system, "Segoe UI", sans-serif;
-        background: var(--bg);
-        color: var(--ink);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        background: var(--background);
+        color: var(--text-primary);
         -webkit-font-smoothing: antialiased;
-        padding-bottom: 124px;
+        padding-bottom: 110px;
       }
       .wrap { max-width: 760px; margin: 0 auto; }
 
-      /* ---------- Header ---------- */
+      /* ---------- Header (FoodDash style) ---------- */
       header {
-        background: var(--orange);
+        background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
         color: #fff;
-        padding: 20px 18px 16px;
+        padding: 24px 20px 20px;
         position: relative;
         overflow: hidden;
       }
       header::after {
         content: "CHAOS";
         position: absolute;
-        right: -14px; bottom: -34px;
-        font-family: "Anton", sans-serif;
-        font-size: 120px;
+        right: -8px; bottom: -28px;
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-size: 105px;
         letter-spacing: 2px;
-        color: rgba(255,255,255,.14);
+        color: rgba(255, 255, 255, 0.08);
         pointer-events: none;
         line-height: 1;
       }
+      .brand-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        position: relative;
+        z-index: 1;
+      }
       .brand {
-        font-family: "Anton", sans-serif;
-        font-size: 40px;
-        letter-spacing: 1.5px;
-        line-height: 1;
+        font-family: "Poppins", sans-serif;
+        font-size: 28px;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+        line-height: 1.15;
         margin: 0;
       }
-      .brand span { font-size: 21px; letter-spacing: 1px; vertical-align: 4px; margin-left: 6px; opacity: .95; }
+      .brand span {
+        font-size: 14.5px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        opacity: 0.9;
+        margin-left: 6px;
+        vertical-align: 2px;
+      }
+      .status-badge.open {
+        font-family: "DM Sans", sans-serif;
+        font-size: 11px;
+        font-weight: 700;
+        background: #DCFCE7;
+        color: #16A34A;
+        padding: 3px 8px;
+        border-radius: var(--radius-pill);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .status-badge.open::before {
+        content: "";
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #16A34A;
+      }
       .tagline {
         display: inline-block;
         margin-top: 8px;
-        font-weight: 800;
-        font-size: 12px;
-        letter-spacing: 3px;
-        background: #1c1714;
-        color: #ffd34d;
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 10.5px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        background: rgba(0, 0, 0, 0.22);
+        color: #FFFFFF;
         padding: 4px 10px;
-        border-radius: 4px;
+        border-radius: var(--radius-pill);
+        position: relative;
+        z-index: 1;
       }
-      .addr { margin: 10px 0 0; font-size: 13.5px; font-weight: 500; opacity: .95; position: relative; z-index: 1; }
+      .addr {
+        margin: 10px 0 0;
+        font-size: 13px;
+        font-weight: 400;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .addr svg { flex: 0 0 auto; opacity: 0.9; }
 
-      /* ---------- Today's special offers — compact side-by-side strip ---------- */
-      .offers { padding: 12px 14px 0; }
+      /* ---------- Special offers (FoodDash style) ---------- */
+      .offers { padding: 18px 14px 4px; }
       .offers-head h2 {
-        font-family: "Anton", sans-serif;
-        font-size: 22px; letter-spacing: .8px;
-        margin: 0; text-transform: uppercase;
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
+        margin: 0;
+        color: var(--text-primary);
       }
-      .offers-head h2 .accent { color: var(--orange); }
-      .offers-head p { margin: 4px 0 9px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
-      .offers-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .offers-head h2 .accent { color: var(--primary); }
+      .offers-head p { margin: 4px 0 12px; font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+      .offers-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
       .offer-card {
-        background: var(--card);
-        border: 1.5px solid var(--line);
-        border-radius: 12px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
         overflow: hidden;
-        box-shadow: var(--shadow);
+        box-shadow: var(--shadow-sm);
         display: flex; flex-direction: column;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
       }
-      .offer-card.live { border-color: var(--orange); box-shadow: 0 8px 22px rgba(242, 107, 48, .28); }
+      .offer-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+      .offer-card.live {
+        border-color: #FECACA;
+        box-shadow: 0 4px 14px rgba(220, 38, 38, 0.14);
+      }
       .offer-media { position: relative; }
-      .offer-media img { display: block; width: 100%; height: 92px; object-fit: cover; object-position: center 32%; }
+      .offer-media img { display: block; width: 100%; height: 96px; object-fit: cover; object-position: center 32%; }
       .offer-card:not(.live) .offer-media img { filter: saturate(.45) brightness(.97); }
       .offer-flag {
         position: absolute; top: 6px; left: 6px;
-        font-size: 8px; font-weight: 800; letter-spacing: .4px;
-        padding: 3px 6px; border-radius: 999px;
-        text-transform: uppercase;
+        font-family: "DM Sans", sans-serif;
+        font-size: 9.5px; font-weight: 700;
+        padding: 3px 8px; border-radius: var(--radius-pill);
         white-space: nowrap;
       }
-      .offer-flag.on { background: var(--green); color: #fff; }
-      .offer-flag.off { background: rgba(28, 23, 20, .85); color: #ffd34d; }
-      .offer-flag.daily { background: var(--orange-dark); color: #fff; }
-      .offer-bar { padding: 7px 7px 9px; display: flex; flex-direction: column; flex: 1; }
-      .offer-top { display: flex; flex-direction: column; gap: 3px; flex: 1; }
-      .offer-title { font-weight: 800; font-size: 12px; line-height: 1.25; }
-      .offer-sub { font-size: 10px; color: var(--muted); font-weight: 600; margin-top: 2px; line-height: 1.3; }
-      .offer-price { font-family: "Anton", sans-serif; font-size: 17px; color: var(--orange-dark); white-space: nowrap; line-height: 1; }
+      .offer-flag.on { background: #DCFCE7; color: #16A34A; }
+      .offer-flag.off { background: #F5F5F5; color: #737373; }
+      .offer-flag.daily { background: #FEF3C7; color: #D97706; }
+      .offer-bar { padding: 9px 10px 11px; display: flex; flex-direction: column; flex: 1; }
+      .offer-top { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+      .offer-title { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 13px; line-height: 1.3; color: var(--text-primary); }
+      .offer-sub { font-size: 11px; color: var(--text-secondary); font-weight: 500; margin-top: 2px; line-height: 1.35; }
+      .offer-price { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15.5px; color: var(--primary); white-space: nowrap; line-height: 1.2; margin-top: 4px; }
       .offer-add {
         width: 100%; margin-top: 8px;
-        font: inherit; font-size: 12px; font-weight: 800;
-        background: var(--orange-dark); color: #fff;
-        border: none; border-radius: 8px;
-        padding: 9px 4px;
+        font-family: "Poppins", sans-serif; font-size: 12.5px; font-weight: 600;
+        background: var(--primary); color: #fff;
+        border: none; border-radius: var(--radius-pill);
+        padding: 7px 10px;
         cursor: pointer;
         white-space: nowrap;
+        box-shadow: 0 2px 6px rgba(220, 38, 38, 0.22);
+        transition: background 0.15s ease, transform 0.1s ease;
       }
-      .offer-add:active { background: var(--orange-dark); }
+      .offer-add:hover { background: var(--primary-hover); }
+      .offer-add:active { transform: scale(0.97); }
       .offer-locked {
         width: 100%; margin-top: 8px;
         text-align: center;
-        font-size: 10.5px; font-weight: 800;
-        color: var(--muted);
-        background: var(--chip-bg);
-        border: 1.5px dashed var(--line);
-        border-radius: 8px;
-        padding: 8px 4px;
+        font-size: 11px; font-weight: 600;
+        color: var(--text-tertiary);
+        background: #F5F5F5;
+        border: 1px dashed var(--line);
+        border-radius: var(--radius-sm);
+        padding: 7px 4px;
         line-height: 1.3;
       }
       .offer-step { display: none; margin-top: 8px; justify-content: center; }
       .stepper.offer-step button { width: 32px; height: 32px; font-size: 16px; }
-      .stepper.offer-step .count { min-width: 22px; font-size: 15px; }
+      .stepper.offer-step .count { min-width: 22px; font-size: 14px; font-weight: 700; }
       .offer-card.in-cart .offer-step { display: flex; }
       .offer-card.in-cart .offer-add { display: none; }
-      @media (min-width: 640px) {
-        .offer-media img { height: 120px; }
-        .offer-title { font-size: 13.5px; }
-        .offer-price { font-size: 19px; }
-        .offer-add { font-size: 13px; padding: 10px 6px; }
-        .offer-bar { padding: 9px 10px 11px; }
-      }
 
-      /* ---------- Search + chips ---------- */
+      /* ---------- Search & filter toolbar (FoodDash style) ---------- */
       .toolbar {
         position: sticky; top: 0; z-index: 40;
-        background: var(--bg);
+        background: var(--surface);
         padding: 12px 14px 8px;
         border-bottom: 1px solid var(--line);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      }
+      .search-box {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .search-icon {
+        position: absolute;
+        left: 14px;
+        color: var(--text-tertiary);
+        pointer-events: none;
       }
       .search {
         width: 100%;
-        font: inherit; font-size: 16px;
-        padding: 12px 14px;
+        font: inherit; font-size: 14px;
+        padding: 11px 16px 11px 40px;
         border: 1.5px solid var(--line);
-        border-radius: 10px;
-        background: var(--field-bg);
-        color: var(--ink);
+        border-radius: var(--radius-pill);
+        background: #FFFFFF;
+        color: var(--text-primary);
         outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
       }
-      .search:focus { border-color: var(--orange); }
+      .search:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+      }
       .chips {
         display: flex; gap: 8px;
         overflow-x: auto;
@@ -181,455 +290,667 @@
       .chips::-webkit-scrollbar { display: none; }
       .chip {
         flex: 0 0 auto;
-        font: inherit; font-size: 13.5px; font-weight: 700;
-        color: var(--chip-ink);
-        background: var(--chip-bg);
-        border: 1.5px solid var(--line);
-        border-radius: 999px;
-        padding: 8px 14px;
+        font: inherit; font-size: 13.5px; font-weight: 500;
+        color: var(--text-primary);
+        background: #F5F5F5;
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 7px 15px;
         cursor: pointer;
         white-space: nowrap;
+        transition: all 0.15s ease;
       }
-      .chip.active { background: var(--orange-dark); border-color: var(--orange-dark); color: #fff; }
+      .chip:hover { background: #EBEBEB; }
+      .chip.active {
+        background: var(--primary);
+        color: #fff;
+        font-weight: 600;
+        box-shadow: 0 2px 8px rgba(220, 38, 38, 0.28);
+      }
 
-      /* ---------- How it works strip ---------- */
+      /* ---------- How it works strip (FoodDash style) ---------- */
       .howto {
         margin: 14px 14px 0;
-        background: var(--card);
+        background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 14px;
-        padding: 16px 14px;
-        display: flex; flex-direction: column; gap: 12px;
+        border-radius: var(--radius-md);
+        padding: 14px 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex; flex-direction: column; gap: 10px;
       }
-      .howto .step { display: flex; align-items: center; gap: 11px; }
+      .howto .step { display: flex; align-items: center; gap: 12px; }
       .howto .n {
         flex: 0 0 auto;
-        width: 28px; height: 28px; border-radius: 50%;
-        background: var(--orange-dark); color: #fff;
-        font-family: "Anton", sans-serif; font-size: 15px;
+        width: 26px; height: 26px; border-radius: 50%;
+        background: var(--primary-light); color: var(--primary);
+        font-family: "Poppins", sans-serif; font-size: 13px; font-weight: 700;
         display: grid; place-items: center;
       }
-      .howto .s { font-size: 13.5px; color: var(--muted); line-height: 1.35; }
-      .howto .s strong { color: var(--ink); display: inline; margin-right: 5px; font-size: 14px; }
+      .howto .s { font-size: 13.5px; color: var(--text-secondary); line-height: 1.4; }
+      .howto .s strong { color: var(--text-primary); display: inline; margin-right: 5px; font-size: 13.5px; font-weight: 600; }
 
-      /* ---------- Menu ---------- */
+      /* ---------- Menu categories & dish lists (FoodDash style) ---------- */
       main { padding: 6px 14px 0; }
-      section.cat { margin-top: 22px; scroll-margin-top: 128px; }
+      section.cat { margin-top: 24px; scroll-margin-top: 130px; }
       section.cat h2 {
-        font-family: "Anton", sans-serif;
-        font-size: 24px;
-        letter-spacing: .8px;
+        font-family: "Poppins", sans-serif;
+        font-size: 20px;
+        font-weight: 700;
+        letter-spacing: -0.3px;
         margin: 0 0 4px;
-        text-transform: uppercase;
+        color: var(--text-primary);
       }
-      section.cat h2 .accent { color: var(--orange); }
-      .cat-note { margin: 0 0 10px; font-size: 13px; color: var(--muted); font-weight: 500; }
+      section.cat h2 .accent { color: var(--primary); }
+      .cat-note { margin: 0 0 10px; font-size: 13px; color: var(--text-secondary); font-weight: 400; }
       .card {
-        background: var(--card);
+        background: var(--surface);
         border: 1px solid var(--line);
-        border-radius: 14px;
+        border-radius: var(--radius-md);
         overflow: hidden;
+        box-shadow: var(--shadow-sm);
       }
       .item {
         display: flex; gap: 12px;
-        padding: 13px 14px;
-        border-bottom: 1px solid var(--line);
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line-subtle);
         align-items: flex-start;
+        transition: background 0.15s ease, border-left 0.15s ease;
       }
       .item:last-child { border-bottom: none; }
+      .item:hover { background: #FAFAFA; }
       .item.hidden { display: none; }
-      .item-info { flex: 1; min-width: 0; }
-      .item-name { font-weight: 800; font-size: 18px; line-height: 1.3; }
-      .item-desc { font-size: 13px; color: var(--muted); margin-top: 3px; line-height: 1.45; }
-      .item-price { font-weight: 800; font-size: 18px; color: var(--orange-dark); margin-top: 5px; }
-
-      .variants { display: flex; gap: 6px; margin-top: 9px; flex-wrap: wrap; }
-      .variant {
-        font: inherit; font-size: 13.5px; font-weight: 700;
-        padding: 10px 15px;
-        border-radius: 8px;
-        border: 1.5px solid var(--line);
-        background: transparent;
-        color: var(--chip-ink);
-        cursor: pointer;
+      .item.in-cart {
+        background: var(--primary-light);
+        border-left: 3px solid var(--primary);
       }
-      .variant.sel { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .item-info { flex: 1; min-width: 0; }
+      .item-name {
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+        font-size: 15px;
+        line-height: 1.35;
+        color: var(--text-primary);
+      }
+      .item-desc {
+        font-family: "DM Sans", sans-serif;
+        font-size: 13px;
+        color: var(--text-secondary);
+        margin-top: 4px;
+        line-height: 1.45;
+      }
+      .item-price {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+        font-size: 15.5px;
+        color: var(--text-primary);
+        margin-top: 6px;
+      }
 
-      .stepper { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; padding-top: 1px; }
+      .variants { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+      .variant {
+        font: inherit; font-size: 12.5px; font-weight: 600;
+        padding: 6px 13px;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--line);
+        background: #F5F5F5;
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: all 0.12s ease;
+      }
+      .variant.sel {
+        background: var(--text-primary);
+        color: #fff;
+        border-color: var(--text-primary);
+        font-weight: 700;
+      }
+
+      /* Stepper (FoodDash style) */
+      .stepper { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; padding-top: 2px; }
       .stepper button {
-        width: 48px; height: 48px;
+        width: 36px; height: 36px;
         border-radius: 50%;
         border: none;
-        font-size: 20px; font-weight: 800;
+        font-size: 18px; font-weight: 700;
         cursor: pointer;
         display: grid; place-items: center;
         line-height: 1;
+        transition: transform 0.1s ease, background 0.15s ease;
       }
+      .stepper button:active { transform: scale(0.92); }
       .stepper .minus {
-        background: var(--chip-bg);
-        border: 1.5px solid var(--line);
-        color: var(--ink);
+        background: #F5F5F5;
+        border: 1px solid var(--line);
+        color: var(--text-primary);
       }
-      .stepper .minus:disabled { opacity: .35; cursor: default; }
-      .stepper .plus { background: var(--orange-dark); color: #fff; }
+      .stepper .minus:disabled { opacity: .3; cursor: default; }
+      .stepper .plus {
+        background: var(--primary);
+        color: #fff;
+        box-shadow: 0 2px 6px rgba(220, 38, 38, 0.25);
+      }
+      .stepper .plus:hover { background: var(--primary-hover); }
       .stepper .count {
-        min-width: 30px; text-align: center;
-        font-weight: 800; font-size: 17px;
+        min-width: 26px; text-align: center;
+        font-weight: 700; font-size: 15px;
+        color: var(--text-primary);
       }
       .stepper.inactive .count, .stepper.inactive .minus { display: none; }
 
       .day-badge {
         display: inline-block;
-        font-size: 11px; font-weight: 800; letter-spacing: .6px;
-        background: #ffd34d; color: #4a2c00;
-        border-radius: 5px; padding: 2px 7px;
-        margin-left: 7px; vertical-align: 2px;
-        text-transform: uppercase;
+        font-family: "DM Sans", sans-serif;
+        font-size: 10px; font-weight: 700; letter-spacing: .4px;
+        background: #FEF3C7; color: #D97706;
+        border-radius: var(--radius-pill); padding: 2px 7px;
+        margin-left: 6px; vertical-align: 2px;
       }
       .today-badge {
         display: inline-block;
-        font-size: 11px; font-weight: 800; letter-spacing: .6px;
-        background: var(--green); color: #fff;
-        border-radius: 5px; padding: 2px 7px;
-        margin-left: 7px; vertical-align: 2px;
-        text-transform: uppercase;
+        font-family: "DM Sans", sans-serif;
+        font-size: 10px; font-weight: 700; letter-spacing: .4px;
+        background: #DCFCE7; color: #16A34A;
+        border-radius: var(--radius-pill); padding: 2px 7px;
+        margin-left: 6px; vertical-align: 2px;
       }
-      .item.in-cart { background: rgba(242, 107, 48, .09); }
-      .item.locked .item-name, .item.locked .item-desc, .item.locked .item-price { opacity: .5; }
+      .item.locked .item-name, .item.locked .item-desc, .item.locked .item-price { opacity: .45; }
       .lock-note {
         display: inline-block;
-        margin-top: 7px;
-        font-size: 12.5px; font-weight: 700;
-        color: var(--muted);
-        background: var(--chip-bg);
-        border: 1.5px dashed var(--line);
-        border-radius: 8px;
-        padding: 5px 9px;
+        margin-top: 6px;
+        font-size: 11.5px; font-weight: 600;
+        color: var(--text-tertiary);
+        background: #F5F5F5;
+        border: 1px dashed var(--line);
+        border-radius: var(--radius-sm);
+        padding: 4px 8px;
       }
-      .stepper .plus:disabled { background: #b3a08c; cursor: not-allowed; }
+      .stepper .plus:disabled { background: #D4D4D4; cursor: not-allowed; box-shadow: none; }
 
-      .empty-search { text-align: center; color: var(--muted); padding: 28px 10px; font-weight: 600; display: none; }
+      .empty-search { text-align: center; color: var(--text-secondary); padding: 28px 10px; font-weight: 500; display: none; }
 
-      /* ---------- Cart bar ---------- */
+      /* ---------- Persistent Cart bar (FoodDash style) ---------- */
       .cartbar {
         position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
-        background: var(--bar-bg);
-        color: var(--bar-ink);
-        padding: 12px 14px calc(12px + env(safe-area-inset-bottom));
-        box-shadow: 0 -6px 24px rgba(0,0,0,.25);
+        background: var(--text-primary);
+        color: #FFFFFF;
+        padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
       }
       .cartbar .inner {
         max-width: 760px; margin: 0 auto;
-        display: flex; align-items: center; gap: 14px;
+        display: flex; align-items: center; justify-content: space-between; gap: 14px;
       }
       .cart-meta { flex: 1; min-width: 0; }
-      .cart-count { font-size: 12.5px; font-weight: 600; opacity: .75; }
-      .cart-total { font-family: "Anton", sans-serif; font-size: 33px; letter-spacing: .5px; line-height: 1.1; }
+      .cart-count { font-size: 12px; font-weight: 500; opacity: .8; text-transform: uppercase; letter-spacing: .4px; }
+      .cart-total { font-family: "Poppins", sans-serif; font-size: 24px; font-weight: 700; letter-spacing: -0.3px; line-height: 1.1; }
       .review-btn {
-        font: inherit; font-weight: 800; font-size: 18px;
-        background: var(--orange-dark); color: #fff;
-        border: none; border-radius: 12px;
-        padding: 13px 30px;
+        font-family: "Poppins", sans-serif; font-weight: 700; font-size: 15px;
+        background: var(--primary); color: #fff;
+        border: none; border-radius: var(--radius-pill);
+        padding: 12px 26px;
         cursor: pointer;
         white-space: nowrap;
         display: flex; flex-direction: column; align-items: center; gap: 1px;
         line-height: 1.25;
+        box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+        transition: background 0.15s ease, transform 0.1s ease;
       }
-      .review-btn:disabled { background: #57493e; color: #b9a894; cursor: default; }
+      .review-btn:hover:not(:disabled) { background: var(--primary-hover); transform: translateY(-1px); }
+      .review-btn:active:not(:disabled) { transform: scale(0.97); }
+      .review-btn:disabled { background: #404040; color: #8A8A8A; cursor: default; box-shadow: none; }
 
-      /* ---------- Review sheet ---------- */
+      /* ---------- Review sheet / Checkout (FoodDash style) ---------- */
       .overlay {
         position: fixed; inset: 0; z-index: 60;
-        background: rgba(15, 8, 3, .55);
+        background: rgba(0, 0, 0, 0.5);
         display: none;
       }
       .overlay.open { display: block; }
       .sheet {
         position: fixed; left: 0; right: 0; bottom: 0; z-index: 61;
-        background: var(--bg);
-        border-radius: 18px 18px 0 0;
+        background: #FFFFFF;
+        border-radius: var(--radius-lg) var(--radius-lg) 0 0;
         max-height: 92dvh;
         overflow: hidden;
         display: flex; flex-direction: column;
         transform: translateY(105%);
         transition: transform .28s ease;
         padding: 18px 18px calc(16px + env(safe-area-inset-bottom));
+        box-shadow: var(--shadow-xl);
       }
       .sheet.open { transform: translateY(0); }
       .sheet .wrap2 { max-width: 720px; margin: 0 auto; width: 100%; display: flex; flex-direction: column; min-height: 0; flex: 1; }
       .flavour-sheet { display: block; overflow-y: auto; }
-      .sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
-      .sheet-head h3 { font-family: "Anton", sans-serif; font-size: 24px; letter-spacing: .6px; margin: 0; text-transform: uppercase; }
+      .sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+      .sheet-head h3 { font-family: "Poppins", sans-serif; font-size: 20px; font-weight: 700; margin: 0; color: var(--text-primary); }
       .close-btn {
-        font: inherit; font-size: 14px; font-weight: 700;
-        background: var(--card); border: 1.5px solid var(--line); color: var(--ink);
-        width: 38px; height: 38px; border-radius: 50%; cursor: pointer;
+        font: inherit; font-size: 13px; font-weight: 600;
+        background: #F5F5F5; border: none; color: var(--text-secondary);
+        width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+        display: grid; place-items: center;
+        transition: background 0.15s ease, color 0.15s ease;
       }
+      .close-btn:hover { background: #E5E5E5; color: var(--text-primary); }
       .sum-line {
         display: flex; justify-content: space-between; gap: 12px;
-        padding: 9px 0; border-bottom: 1px dashed var(--line);
-        font-size: 14.5px;
+        padding: 10px 0; border-bottom: 1px solid var(--line-subtle);
+        font-size: 14px;
       }
       .sum-line .l { flex: 1; min-width: 0; }
-      .sum-line .l small { display: block; color: var(--muted); font-size: 12.5px; margin-top: 1px; }
-      .sum-line .r { font-weight: 700; white-space: nowrap; }
+      .sum-line .l span { font-weight: 600; color: var(--text-primary); }
+      .sum-line .l small { display: block; color: var(--text-secondary); font-size: 12px; margin-top: 2px; }
+      .sum-line .r { font-family: "Poppins", sans-serif; font-weight: 700; font-size: 14.5px; white-space: nowrap; color: var(--text-primary); }
       .sum-total {
         display: flex; justify-content: space-between; align-items: baseline;
-        padding: 12px 0 2px; font-weight: 800; font-size: 17px;
+        padding: 14px 0 4px; font-weight: 700; font-size: 16px;
       }
-      .sum-total .amt { font-family: "Anton", sans-serif; font-size: 26px; color: var(--orange-dark); }
-      .fee-note { font-size: 13px; color: var(--muted); margin: 2px 0 16px; }
+      .sum-total .amt { font-family: "Poppins", sans-serif; font-size: 24px; font-weight: 800; color: var(--primary); }
+      .fee-note { font-size: 12.5px; color: var(--text-secondary); margin: 2px 0 16px; font-weight: 500; }
 
-      .field { margin-bottom: 12px; }
-      .field label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 5px; }
-      .field label .req { color: var(--danger); }
+      /* Form inputs (FoodDash style) */
+      .field { margin-bottom: 14px; }
+      .field label { display: block; font-size: 13.5px; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
+      .field label .req { color: var(--error); }
       .field input, .field textarea {
         width: 100%;
-        font: inherit; font-size: 16px;
-        padding: 12px 13px;
+        font: inherit; font-size: 14px;
+        padding: 11px 14px;
         border: 1.5px solid var(--line);
-        border-radius: 10px;
-        background: var(--field-bg);
-        color: var(--ink);
+        border-radius: var(--radius-md);
+        background: #FFFFFF;
+        color: var(--text-primary);
         outline: none;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
       }
-      .field input:focus, .field textarea:focus { border-color: var(--orange); }
-      .field.error input, .field.error textarea { border-color: var(--danger); background: rgba(217,45,32,.06); }
-      .field .err-msg { display: none; color: var(--danger); font-size: 12.5px; font-weight: 600; margin-top: 4px; }
+      .field input:focus, .field textarea:focus {
+        border-color: var(--primary);
+        box-shadow: var(--focus-ring);
+      }
+      .field.error input, .field.error textarea {
+        border-color: var(--error);
+        background: var(--primary-light);
+      }
+      .field .err-msg { display: none; color: var(--error); font-size: 12px; font-weight: 500; margin-top: 4px; }
       .field.error .err-msg { display: block; }
       .field textarea { resize: vertical; min-height: 56px; }
 
-      .type-toggle { display: flex; gap: 8px; }
+      /* Order type toggle (FoodDash style) */
+      .type-toggle { display: flex; gap: 10px; }
       .type-toggle button {
         flex: 1;
-        font: inherit; font-size: 16px; font-weight: 800;
-        padding: 12px 8px;
-        min-height: 72px;
-        border-radius: 12px;
+        font: inherit; font-size: 15px; font-weight: 600;
+        padding: 12px 10px;
+        min-height: 64px;
+        border-radius: var(--radius-md);
         border: 1.5px solid var(--line);
-        background: var(--card);
-        color: var(--ink);
+        background: #FFFFFF;
+        color: var(--text-secondary);
         cursor: pointer;
         display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+        transition: all 0.15s ease;
       }
-      .type-toggle button.sel { background: var(--orange-dark); border-color: var(--orange-dark); color: #fff; }
+      .type-toggle button:hover { background: #FAFAFA; }
+      .type-toggle button.sel {
+        background: var(--primary-light);
+        border-color: var(--primary);
+        color: var(--primary);
+        font-weight: 700;
+      }
 
+      /* Primary CTAs (FoodDash style) */
       .send-wa {
         display: flex; align-items: center; justify-content: center; gap: 9px;
         width: 100%;
-        font: inherit; font-size: 17px; font-weight: 800;
-        background: var(--green); color: #fff;
-        border: none; border-radius: 12px;
-        padding: 16px;
+        font-family: "Poppins", sans-serif; font-size: 15.5px; font-weight: 700;
+        background: var(--tertiary); color: #fff;
+        border: none; border-radius: var(--radius-pill);
+        padding: 14px 20px;
         cursor: pointer;
         margin-top: 8px;
+        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.28);
+        transition: background 0.15s ease, transform 0.1s ease;
       }
-      .send-wa:active { background: var(--green-dark); }
+      .send-wa:hover { background: var(--tertiary-hover); }
+      .send-wa:active { transform: scale(0.98); }
       .send-ms {
         display: flex; align-items: center; justify-content: center; gap: 9px;
         width: 100%;
-        font: inherit; font-size: 15.5px; font-weight: 800;
-        background: transparent; color: var(--blue);
-        border: 2px solid var(--blue); border-radius: 12px;
-        padding: 13px;
+        font-family: "Poppins", sans-serif; font-size: 14.5px; font-weight: 600;
+        background: transparent; color: var(--info);
+        border: 1.5px solid var(--info); border-radius: var(--radius-pill);
+        padding: 12px 18px;
         cursor: pointer;
         margin-top: 10px;
+        transition: background 0.15s ease;
       }
-      .ms-hint { text-align: center; font-size: 13px; color: var(--muted); margin: 7px 0 0; }
+      .send-ms:hover { background: rgba(37, 99, 235, 0.06); }
+      .ms-hint { text-align: center; font-size: 12px; color: var(--text-tertiary); margin: 7px 0 0; }
       .copied-note {
         display: none;
-        text-align: center; font-size: 13.5px; font-weight: 700; color: var(--green-dark);
+        text-align: center; font-size: 13px; font-weight: 600; color: var(--tertiary);
         margin-top: 10px;
       }
       .copied-note.show { display: block; }
       .send-wa svg, .send-ms svg { flex: 0 0 auto; }
 
-      /* ---------- Flavour picker (Chaos Wings) ---------- */
+      /* Flavour picker (FoodDash style) */
       .flavour-overlay { z-index: 70; }
       .flavour-sheet { z-index: 71; }
-      .flavour-sub { font-size: 13.5px; color: var(--muted); font-weight: 600; margin: 0 0 4px; line-height: 1.45; }
+      .flavour-sub { font-size: 13px; color: var(--text-secondary); font-weight: 500; margin: 0 0 6px; line-height: 1.4; }
       .flavour-meta { display: flex; align-items: center; gap: 10px; margin: 10px 0 12px; }
       .flavour-counter {
-        font-family: "Anton", sans-serif; font-size: 20px; letter-spacing: .5px;
-        background: var(--ink); color: var(--bg);
-        border-radius: 8px; padding: 4px 12px; line-height: 1.2;
+        font-family: "Poppins", sans-serif; font-size: 16px; font-weight: 700;
+        background: var(--text-primary); color: #fff;
+        border-radius: var(--radius-sm); padding: 4px 10px; line-height: 1.2;
       }
-      .flavour-hint { font-size: 13px; font-weight: 700; color: var(--muted); }
-      .flavour-hint.warn { color: var(--danger); }
+      .flavour-hint { font-size: 13px; font-weight: 600; color: var(--text-secondary); }
+      .flavour-hint.warn { color: var(--error); }
       .flavour-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
       .flavour-chip {
-        font: inherit; font-size: 14.5px; font-weight: 800;
-        padding: 12px 16px; border-radius: 999px;
-        border: 1.5px solid var(--line);
-        background: var(--card); color: var(--ink);
+        font: inherit; font-size: 13.5px; font-weight: 600;
+        padding: 9px 16px; border-radius: var(--radius-pill);
+        border: 1px solid var(--line);
+        background: #F5F5F5; color: var(--text-primary);
         cursor: pointer;
+        transition: all 0.12s ease;
       }
-      .flavour-chip.sel { background: var(--orange-dark); border-color: var(--orange-dark); color: #fff; }
+      .flavour-chip.sel { background: var(--primary); border-color: var(--primary); color: #fff; }
       .flavour-confirm {
         width: 100%;
-        font: inherit; font-size: 16.5px; font-weight: 800;
-        background: var(--orange-dark); color: #fff;
-        border: none; border-radius: 12px; padding: 15px;
+        font-family: "Poppins", sans-serif; font-size: 15px; font-weight: 700;
+        background: var(--primary); color: #fff;
+        border: none; border-radius: var(--radius-pill); padding: 14px;
         cursor: pointer;
+        box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
       }
-      .flavour-confirm:disabled { background: #57493e; color: #b9a894; cursor: default; }
-      .flavour-note { text-align: center; font-size: 12.5px; color: var(--muted); margin: 9px 0 0; line-height: 1.45; }
+      .flavour-confirm:disabled { background: #D4D4D4; color: #8A8A8A; cursor: default; box-shadow: none; }
+      .flavour-note { text-align: center; font-size: 12px; color: var(--text-tertiary); margin: 9px 0 0; line-height: 1.4; }
       .sum-remove {
-        font: inherit; font-size: 12px; font-weight: 800;
-        background: transparent; color: var(--danger);
-        border: 1.5px solid var(--danger); border-radius: 999px;
-        padding: 4px 10px; cursor: pointer; margin-top: 6px;
+        font: inherit; font-size: 11.5px; font-weight: 600;
+        background: transparent; color: var(--error);
+        border: 1px solid var(--error); border-radius: var(--radius-pill);
+        padding: 3px 8px; cursor: pointer; margin-top: 5px;
       }
-      .sum-stepper { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; }
+      .sum-stepper { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
       .sum-stepper button {
-        width: 38px; height: 38px; border-radius: 50%; border: none;
-        font-size: 18px; font-weight: 800; cursor: pointer;
+        width: 30px; height: 30px; border-radius: 50%; border: none;
+        font-size: 16px; font-weight: 700; cursor: pointer;
         display: grid; place-items: center; line-height: 1;
       }
-      .sum-stepper .minus { background: var(--chip-bg); border: 1.5px solid var(--line); color: var(--ink); }
-      .sum-stepper .plus { background: var(--orange-dark); color: #fff; }
-      .sum-stepper .count { min-width: 26px; text-align: center; font-weight: 800; font-size: 16px; }
-      .sum-line { align-items: center; flex-wrap: wrap; }
-      .sum-line .r { min-width: 64px; text-align: right; }
-      .add-more-wrap { padding: 12px 0 4px; }
+      .sum-stepper .minus { background: #F5F5F5; border: 1px solid var(--line); color: var(--text-primary); }
+      .sum-stepper .plus { background: var(--primary); color: #fff; }
+      .sum-stepper .count { min-width: 22px; text-align: center; font-weight: 700; font-size: 14px; }
+      .add-more-wrap { padding: 10px 0 4px; }
       .add-more-btn {
         width: 100%;
-        font: inherit; font-size: 15.5px; font-weight: 800;
-        background: var(--card); color: var(--orange-dark);
-        border: 2px dashed var(--orange); border-radius: 12px;
-        padding: 13px; cursor: pointer;
+        font-family: "Poppins", sans-serif; font-size: 14px; font-weight: 600;
+        background: var(--primary-light); color: var(--primary);
+        border: 1.5px dashed #FCA5A5; border-radius: var(--radius-md);
+        padding: 11px; cursor: pointer;
+        transition: background 0.15s ease;
       }
-      .add-more-btn:active { background: rgba(242,107,48,.10); }
+      .add-more-btn:hover { background: #FEE2E2; }
       .empty-state { text-align: center; padding: 28px 10px 10px; }
-      .empty-state .empty-title { font-family: "Anton", sans-serif; font-size: 22px; letter-spacing: .5px; margin: 0 0 6px; text-transform: uppercase; }
-      .empty-state p { color: var(--muted); font-size: 14px; font-weight: 600; margin: 0 0 16px; line-height: 1.45; }
+      .empty-state .empty-title { font-family: "Poppins", sans-serif; font-size: 18px; font-weight: 700; margin: 0 0 6px; color: var(--text-primary); }
+      .empty-state p { color: var(--text-secondary); font-size: 13.5px; margin: 0 0 16px; line-height: 1.4; }
       .browse-btn {
-        font: inherit; font-size: 16px; font-weight: 800;
-        background: var(--orange-dark); color: #fff; border: none; border-radius: 12px;
-        padding: 14px 22px; cursor: pointer; width: 100%;
+        font-family: "Poppins", sans-serif; font-size: 14.5px; font-weight: 600;
+        background: var(--primary); color: #fff; border: none; border-radius: var(--radius-pill);
+        padding: 12px 22px; cursor: pointer; width: 100%;
       }
 
-      /* ---------- UX polish: steps, sticky send footer, feedback ---------- */
-      body { overflow-x: clip; }
-      .btn-sub { display: block; font-size: 11.5px; font-weight: 700; opacity: .92; line-height: 1.3; }
+      /* Shake Upsell (FoodDash style) */
+      .shake-reminder {
+        margin: 14px 0 10px;
+        background: #FFF5F5;
+        border: 1px solid #FECACA;
+        border-radius: var(--radius-md);
+        padding: 14px 16px;
+        box-shadow: var(--shadow-sm);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        position: relative;
+        animation: shakeFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      @keyframes shakeFadeIn {
+        0% { opacity: 0; transform: translateY(6px); }
+        100% { opacity: 1; transform: translateY(0); }
+      }
+      .shake-reminder-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .shake-reminder-title {
+        font-family: "Poppins", sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #991B1B;
+        line-height: 1.3;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .shake-reminder-sub {
+        font-size: 12px;
+        color: #7F1D1D;
+        opacity: 0.85;
+        margin: 2px 0 0;
+        line-height: 1.35;
+      }
+      .shake-dismiss-btn {
+        background: rgba(0, 0, 0, 0.05);
+        border: none;
+        font-size: 12px;
+        color: var(--text-tertiary);
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        transition: background 0.15s ease;
+      }
+      .shake-dismiss-btn:hover { background: rgba(0, 0, 0, 0.1); color: var(--text-primary); }
+      .shake-shakes-scroll {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding: 2px 2px 4px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .shake-shakes-scroll::-webkit-scrollbar { display: none; }
+      .shake-card {
+        flex: 0 0 auto;
+        background: #FFFFFF;
+        border: 1px solid #FEE2E2;
+        border-radius: var(--radius-md);
+        padding: 10px 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 6px;
+        min-width: 130px;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.15s ease, border-color 0.15s ease;
+      }
+      .shake-card:hover {
+        border-color: var(--primary);
+        transform: translateY(-1px);
+      }
+      .shake-card-top { display: flex; align-items: center; gap: 6px; }
+      .shake-card-icon { font-size: 16px; line-height: 1; flex: 0 0 auto; }
+      .shake-card-name {
+        font-family: "Poppins", sans-serif;
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--text-primary);
+        white-space: nowrap;
+      }
+      .shake-card-name small { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
+      .shake-card-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 6px;
+        margin-top: 2px;
+      }
+      .shake-card-price {
+        font-family: "Poppins", sans-serif;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--primary);
+      }
+      .shake-add-btn {
+        font-family: "Poppins", sans-serif;
+        font-size: 11px;
+        font-weight: 600;
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        border-radius: var(--radius-pill);
+        padding: 5px 10px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.15s ease, transform 0.1s ease;
+      }
+      .shake-add-btn:hover { background: var(--primary-hover); }
+      .shake-add-btn:active { transform: scale(0.95); }
+      .shake-success-pill {
+        background: #DCFCE7;
+        border: 1px solid #86EFAC;
+        color: #16A34A;
+        border-radius: var(--radius-md);
+        padding: 10px 14px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        animation: shakeFadeIn 0.2s ease;
+      }
+
+      /* Steps (FoodDash status chip style) */
+      .steps { display: flex; align-items: center; gap: 6px; margin: 4px 0 14px; flex-wrap: wrap; flex: 0 0 auto; }
+      .steps .st {
+        font-size: 12px; font-weight: 600;
+        padding: 4px 10px; border-radius: var(--radius-pill);
+        border: none;
+        color: var(--text-tertiary); background: #F5F5F5;
+      }
+      .steps .st.done { background: #DCFCE7; color: #16A34A; }
+      .steps .st.active { background: var(--primary); color: #fff; }
+      .steps .sep { color: var(--text-tertiary); font-weight: 600; font-size: 11px; }
+
+      .btn-sub { display: block; font-size: 11px; font-weight: 500; opacity: .88; line-height: 1.25; }
       .add-more-btn { display: flex; flex-direction: column; align-items: center; gap: 1px; }
       .send-txt { display: flex; flex-direction: column; line-height: 1.3; text-align: left; }
-      .send-sub { font-size: 12px; font-weight: 700; opacity: .92; }
+      .send-sub { font-size: 11.5px; font-weight: 500; opacity: .9; }
       .sheet-body { overflow-y: auto; min-height: 0; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
-      .sheet-foot { border-top: 1px solid var(--line); padding-top: 4px; background: var(--bg); flex: 0 0 auto; }
-      .sheet-foot .send-wa { margin-top: 6px; }
-      .steps { display: flex; align-items: center; gap: 6px; margin: 2px 0 12px; flex-wrap: wrap; flex: 0 0 auto; }
-      .steps .st {
-        font-size: 12px; font-weight: 800; letter-spacing: .3px;
-        padding: 5px 10px; border-radius: 999px;
-        border: 1.5px solid var(--line);
-        color: var(--muted); background: var(--card);
-      }
-      .steps .st.done { color: var(--ink); }
-      .steps .st.active { background: var(--orange-dark); border-color: var(--orange-dark); color: #fff; }
-      .steps .sep { color: var(--muted); font-weight: 800; font-size: 12px; }
-      .chips { scroll-behavior: smooth; }
-      button:focus-visible, input:focus-visible, textarea:focus-visible {
-        outline: 3px solid var(--orange-dark); outline-offset: 2px;
-      }
-      @keyframes pulseAdd { 0% { transform: scale(1); } 40% { transform: scale(1.22); } 100% { transform: scale(1); } }
-      .pulsing { animation: pulseAdd .32s ease; }
-      @keyframes barFlash { 0% { background: var(--orange-dark); } 100% { background: var(--bar-bg); } }
-      .cartbar.flash { animation: barFlash .45s ease; }
+      .sheet-foot { border-top: 1px solid var(--line); padding-top: 8px; background: #FFFFFF; flex: 0 0 auto; }
 
-      footer { padding: 26px 18px 8px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.6; }
-      footer .f-brand { font-family: "Anton", sans-serif; font-size: 18px; color: var(--ink); letter-spacing: 1px; }
-
-      @media (min-width: 640px) {
-        .brand { font-size: 48px; }
-        .item { padding: 15px 18px; }
-      }
-
-      /* ---------- Location in checkout ---------- */
+      /* Location card in checkout */
       .location-block {
         margin-top: 14px;
-        background: var(--card);
-        border: 1.5px solid var(--line);
-        border-radius: 14px;
+        background: #FAFAFA;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
         padding: 14px;
       }
       .location-row { display: flex; gap: 10px; align-items: flex-start; }
-      .location-pin { font-size: 22px; line-height: 1.1; flex: 0 0 auto; }
+      .location-pin { font-size: 20px; line-height: 1.1; flex: 0 0 auto; }
       .location-info { flex: 1; min-width: 0; }
-      .location-title { font-weight: 800; font-size: 15px; line-height: 1.35; color: var(--ink); }
-      .location-sub { font-size: 12.5px; color: var(--muted); line-height: 1.45; margin-top: 3px; font-weight: 600; }
+      .location-title { font-family: "Poppins", sans-serif; font-weight: 600; font-size: 13.5px; line-height: 1.35; color: var(--text-primary); }
+      .location-sub { font-size: 12px; color: var(--text-secondary); line-height: 1.4; margin-top: 3px; }
       #mapsBtn {
         display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-        margin-top: 12px;
-        font-size: 13.5px; font-weight: 800;
-        background: var(--ink); color: #fff;
+        margin-top: 10px;
+        font-family: "Poppins", sans-serif;
+        font-size: 13px; font-weight: 600;
+        background: var(--text-primary); color: #fff;
         text-decoration: none;
-        padding: 10px 16px; border-radius: 999px;
+        padding: 8px 16px; border-radius: var(--radius-pill);
         white-space: nowrap;
+        transition: background 0.15s ease;
       }
       #mapsBtn:hover { background: #000; }
-      #mapsBtn:active { opacity: .92; }
 
-      /* ---------- Tablet: 2-column menu grid ---------- */
+      footer {
+        padding: 32px 18px 12px;
+        text-align: center;
+        color: var(--text-secondary);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      footer .f-brand {
+        font-family: "Poppins", sans-serif;
+        font-weight: 800;
+        font-size: 20px;
+        color: var(--text-primary);
+        letter-spacing: -0.5px;
+        margin-bottom: 4px;
+      }
+
+      /* Desktop / Tablet Grid (FoodDash style) */
       @media (min-width: 768px) {
         .card { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .card .item { min-width: 0; border-bottom: 1px solid var(--line); }
-        .card .item:nth-child(odd) { border-right: 1px solid var(--line); }
+        .card .item { min-width: 0; border-bottom: 1px solid var(--line-subtle); }
+        .card .item:nth-child(odd) { border-right: 1px solid var(--line-subtle); }
         .card .item.hidden { display: none; }
         .howto { flex-direction: row; }
         .howto .step { flex: 1; min-width: 0; }
-        .offers { padding: 16px 18px 0; }
-        .toolbar { padding: 12px 18px 8px; }
-        .howto { margin: 14px 18px 0; }
-        main { padding: 6px 18px 0; }
+        .offers { padding: 18px 18px 0; }
+        .toolbar { padding: 14px 18px 10px; }
+        .howto { margin: 16px 18px 0; }
+        main { padding: 8px 18px 0; }
       }
-
-      /* ---------- Desktop: wide centred layout, floating cart, modal sheet ---------- */
       @media (min-width: 1024px) {
-        .wrap { max-width: 1150px; }
-        header { padding: 28px 28px 22px; }
-        .offers { padding: 20px 24px 0; }
-        .offers-head h2 { font-size: 28px; }
-        .offers-head p { font-size: 13.5px; }
-        .offers-grid { gap: 16px; }
-        .offer-media img { height: 190px; object-position: center 38%; }
+        .wrap { max-width: 1100px; }
+        header { padding: 32px 32px 26px; border-radius: 0 0 var(--radius-lg) var(--radius-lg); }
+        .brand { font-size: 40px; }
+        .offers { padding: 22px 24px 0; }
+        .offers-head h2 { font-size: 24px; }
+        .offers-grid { gap: 14px; }
+        .offer-media img { height: 180px; }
         .offer-bar { padding: 12px 14px 14px; }
-        .offer-title { font-size: 16px; }
-        .offer-sub { font-size: 12px; }
-        .offer-price { font-size: 22px; }
-        .offer-add { font-size: 14px; padding: 11px 8px; }
-        .toolbar { padding: 14px 24px 10px; }
-        .howto { margin: 16px 24px 0; padding: 18px; }
-        main { padding: 8px 24px 0; }
-        section.cat { margin-top: 28px; }
-        section.cat h2 { font-size: 28px; }
-        .card .item { padding: 16px 18px; }
-        footer { padding: 32px 24px 10px; }
+        .offer-title { font-size: 15px; }
+        .offer-price { font-size: 20px; }
+        .offer-add { font-size: 13.5px; padding: 9px 12px; }
+        .toolbar { padding: 16px 24px 12px; }
+        .howto { margin: 18px 24px 0; padding: 16px 20px; }
+        main { padding: 10px 24px 0; }
+        section.cat { margin-top: 30px; }
+        section.cat h2 { font-size: 24px; }
+        .card .item { padding: 16px 20px; }
+        .item-name { font-size: 16px; }
+        footer { padding: 40px 24px 16px; }
         body { padding-bottom: 110px; }
         .cartbar {
           left: 50%; right: auto;
           transform: translateX(-50%);
           width: min(720px, calc(100% - 40px));
           bottom: 20px;
-          border-radius: 16px;
-          padding: 12px 16px;
-          box-shadow: 0 14px 38px rgba(0,0,0,.30);
+          border-radius: var(--radius-lg);
+          padding: 12px 20px;
+          box-shadow: 0 12px 36px rgba(0,0,0,.28);
         }
         .cartbar .inner { max-width: none; }
         .sheet {
           left: 50%; right: auto; top: 50%; bottom: auto;
           width: 560px; max-width: calc(100vw - 40px);
-          max-height: 88vh;
+          max-height: 86vh;
           border-radius: 20px;
           transform: translate(-50%, -46%);
           opacity: 0; pointer-events: none;
           transition: transform .28s ease, opacity .28s ease;
-          box-shadow: 0 24px 60px rgba(0,0,0,.30);
-          padding: 22px 22px 18px;
+          box-shadow: var(--shadow-xl);
+          padding: 24px 24px 20px;
         }
         .sheet.open { transform: translate(-50%, -50%); opacity: 1; pointer-events: auto; }
-        .sheet .wrap2 { max-width: none; }
-        .flavour-sheet { width: 520px; }
         .location-block { display: flex; align-items: center; gap: 14px; }
         .location-row { flex: 1; min-width: 0; }
         #mapsBtn { margin-top: 0; flex: 0 0 auto; }
@@ -638,16 +959,21 @@
         html { scroll-behavior: auto; }
         .sheet { transition: none; }
         .chips { scroll-behavior: auto; }
-        .pulsing, .cartbar.flash { animation: none; }
       }
     </style>
   </head>
   <body>
     <div class="wrap">
       <header>
-        <h1 class="brand">CHAOS<span>— ORDER ONLINE</span></h1>
-        <span class="tagline">FEEL THE VIBE</span>
-        <p class="addr">Highway Plaza, Ispahani Circle, Lalkhan Bazar, Chattogram</p>
+        <div class="brand-row">
+          <h1 class="brand">CHAOS<span>— ORDER ONLINE</span></h1>
+          <span class="status-badge open">Open Now</span>
+        </div>
+        <span class="tagline">FEEL THE VIBE · FRESH BURGERS &amp; PLATTERS</span>
+        <p class="addr">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Highway Plaza, Ispahani Circle, Lalkhan Bazar, Chattogram
+        </p>
       </header>
 
       <section class="offers" aria-label="Today's special offers">
@@ -659,7 +985,10 @@
       </section>
 
       <div class="toolbar">
-        <input class="search" id="search" type="search" placeholder="Search the menu… e.g. burger, naga, shake" autocomplete="off" />
+        <div class="search-box">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <input class="search" id="search" type="search" placeholder="Search the menu… e.g. burger, naga, shake" autocomplete="off" />
+        </div>
         <nav class="chips" id="chips" aria-label="Menu categories"></nav>
       </div>
 
@@ -710,6 +1039,21 @@
           <p>Add something tasty from the menu to place an order.</p>
           <button type="button" class="browse-btn" id="browseMenuBtn">Browse the menu</button>
         </div>
+
+        <!-- Shake Reminder in Checkout -->
+        <div class="shake-reminder" id="shakeBotReminder" style="display: none;">
+          <div id="shakeReminderContent">
+            <div class="shake-reminder-head">
+              <div>
+                <div class="shake-reminder-title">Add a chilled shake? 🥤</div>
+                <p class="shake-reminder-sub">Nothing pairs better with your meal — tap to add:</p>
+              </div>
+              <button type="button" class="shake-dismiss-btn" id="botDismissBtn" aria-label="Dismiss shake options" title="Dismiss">✕</button>
+            </div>
+            <div class="shake-shakes-scroll" id="botShakesScroll"></div>
+          </div>
+        </div>
+
         <div class="add-more-wrap" id="addMoreWrap">
           <button type="button" class="add-more-btn" id="addMoreBtn"><span>+ Add more items</span><span class="btn-sub">আরও যোগ করুন</span></button>
         </div>
@@ -1455,17 +1799,189 @@
           summaryEl.appendChild(line);
         });
         sumTotalEl.textContent = money(cartTotals().total);
+        checkShakeBotReminder();
       }
+
+      /* ===== Shake reminder upsell logic ===== */
+      var SHAKE_SUGGESTIONS = [
+        { id: "oreo-shake", name: "Oreo Shake", variantLabel: "S", variantIdx: 0, price: 139, icon: "🍪" },
+        { id: "nutella-shake", name: "Nutella Shake", variantLabel: "", variantIdx: 0, price: 209, icon: "🍫" },
+        { id: "snickers-shake", name: "Snickers Shake", variantLabel: "", variantIdx: 0, price: 199, icon: "🥜" },
+        { id: "creamy-strawberry", name: "Creamy Strawberry", variantLabel: "S", variantIdx: 0, price: 129, icon: "🍓" }
+      ];
+
+      function findMenuItem(id) {
+        for (var i = 0; i < MENU.length; i++) {
+          for (var j = 0; j < MENU[i].items.length; j++) {
+            if (MENU[i].items[j].id === id) return MENU[i].items[j];
+          }
+        }
+        return null;
+      }
+
+      function cartHasShake() {
+        return cartEntries().some(function (e) {
+          if (!e || !e.item) return false;
+          var id = e.item.id || "";
+          var name = (e.item.name || "").toLowerCase();
+          return id.indexOf("shake") !== -1 || name.indexOf("shake") !== -1 || id === "choc-coffee" || id === "creamy-strawberry";
+        });
+      }
+
+      var botDismissed = false;
+
+      function renderBotShakesList() {
+        var container = document.getElementById("botShakesScroll");
+        if (!container) return;
+        container.innerHTML = "";
+        SHAKE_SUGGESTIONS.forEach(function (s) {
+          var item = findMenuItem(s.id);
+          if (!item) return;
+          var price = s.price;
+          if (item.variants && item.variants[s.variantIdx]) price = item.variants[s.variantIdx].price;
+          else if (item.price) price = item.price;
+
+          var card = document.createElement("div");
+          card.className = "shake-card";
+
+          var topRow = document.createElement("div");
+          topRow.className = "shake-card-top";
+          topRow.innerHTML = '<span class="shake-card-icon">' + s.icon + '</span> <span class="shake-card-name">' + s.name + (s.variantLabel ? ' <small>(' + s.variantLabel + ')</small>' : '') + '</span>';
+
+          var bottomRow = document.createElement("div");
+          bottomRow.className = "shake-card-bottom";
+
+          var priceSpan = document.createElement("span");
+          priceSpan.className = "shake-card-price";
+          priceSpan.textContent = money(price);
+
+          var addBtn = document.createElement("button");
+          addBtn.type = "button";
+          addBtn.className = "shake-add-btn";
+          addBtn.textContent = "+ Add";
+          addBtn.setAttribute("aria-label", "Add " + s.name + " to order");
+          (function (shakeDef, realItem, p) {
+            addBtn.addEventListener("click", function () {
+              addBotShake(shakeDef.id, shakeDef.variantIdx, shakeDef.name, shakeDef.variantLabel, p);
+            });
+          })(s, item, price);
+
+          bottomRow.appendChild(priceSpan);
+          bottomRow.appendChild(addBtn);
+          card.appendChild(topRow);
+          card.appendChild(bottomRow);
+          container.appendChild(card);
+        });
+      }
+
+      function addBotShake(itemId, variantIdx, name, variantLabel, price) {
+        var it = findMenuItem(itemId);
+        if (!it) return;
+        var vLabel = variantLabel || "";
+        var unitP = price;
+        if (it.variants) {
+          var v = it.variants[variantIdx || 0];
+          vLabel = v.label;
+          unitP = v.price;
+        }
+        var key = keyOf(it, vLabel);
+        var e = cart[key];
+        if (!e) {
+          e = cart[key] = { item: it, variantLabel: vLabel, flavours: null, unitPrice: unitP, qty: 0, key: key };
+        }
+        e.qty += 1;
+        updateCartBar();
+        refreshAllRows();
+        refreshOffers();
+        renderSummary();
+
+        // Elegant inline confirmation
+        var content = document.getElementById("shakeReminderContent");
+        if (content) {
+          content.innerHTML = '<div class="shake-success-pill">' +
+            '<span style="font-size:16px;">✓</span>' +
+            '<span>Added <strong>' + name + (vLabel ? ' (' + vLabel + ')' : '') + '</strong> to your order! 🥤</span>' +
+          '</div>';
+          setTimeout(function () {
+            var reminder = document.getElementById("shakeBotReminder");
+            if (reminder) {
+              reminder.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+              reminder.style.opacity = "0";
+              reminder.style.transform = "translateY(-6px)";
+              setTimeout(function () {
+                reminder.style.display = "none";
+                reminder.style.opacity = "";
+                reminder.style.transform = "";
+              }, 300);
+            }
+          }, 1800);
+        }
+      }
+
+      function checkShakeBotReminder() {
+        var reminder = document.getElementById("shakeBotReminder");
+        if (!reminder) return;
+        var hasItems = cartEntries().length > 0;
+        var hasShake = cartHasShake();
+
+        if (!hasItems || hasShake || botDismissed) {
+          reminder.style.display = "none";
+          return;
+        }
+
+        var content = document.getElementById("shakeReminderContent");
+        if (content && !content.querySelector(".shake-reminder-title")) {
+          content.innerHTML = '<div class="shake-reminder-head">' +
+            '<div>' +
+              '<div class="shake-reminder-title">Add a chilled shake? 🥤</div>' +
+              '<p class="shake-reminder-sub">Nothing pairs better with your meal — tap to add:</p>' +
+            '</div>' +
+            '<button type="button" class="shake-dismiss-btn" id="botDismissBtn" aria-label="Dismiss shake options" title="Dismiss">✕</button>' +
+          '</div>' +
+          '<div class="shake-shakes-scroll" id="botShakesScroll"></div>';
+
+          var dismissBtn = document.getElementById("botDismissBtn");
+          if (dismissBtn) {
+            dismissBtn.addEventListener("click", dismissShakeReminder);
+          }
+        }
+        renderBotShakesList();
+
+        reminder.style.display = "flex";
+      }
+
+      function dismissShakeReminder() {
+        botDismissed = true;
+        var reminder = document.getElementById("shakeBotReminder");
+        if (reminder) {
+          reminder.style.transition = "opacity 0.25s ease, transform 0.25s ease";
+          reminder.style.opacity = "0";
+          reminder.style.transform = "scale(0.97)";
+          setTimeout(function () {
+            reminder.style.display = "none";
+            reminder.style.opacity = "";
+            reminder.style.transform = "";
+          }, 250);
+        }
+      }
+
+      var botDismissBtn = document.getElementById("botDismissBtn");
+      if (botDismissBtn) {
+        botDismissBtn.addEventListener("click", dismissShakeReminder);
+      }
+
       function openSheet() {
         renderSummary();
         overlay.classList.add("open");
         sheet.classList.add("open");
         document.body.style.overflow = "hidden";
+        setTimeout(checkShakeBotReminder, 120);
       }
       function closeSheet() {
         overlay.classList.remove("open");
         sheet.classList.remove("open");
         document.body.style.overflow = "";
+        botDismissed = false;
       }
       reviewBtn.addEventListener("click", openSheet);
       document.getElementById("closeSheet").addEventListener("click", closeSheet);
