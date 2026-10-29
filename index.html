@@ -366,6 +366,35 @@
         background: var(--primary-light);
         border-left: 3px solid var(--primary);
       }
+      @keyframes dealGlow {
+        0% {
+          background-color: #FFEDD5;
+          box-shadow: 0 0 0 3px #F26B30, 0 8px 24px rgba(242, 107, 48, 0.32);
+          transform: translateY(-2px);
+        }
+        50% {
+          background-color: #FFF7ED;
+          box-shadow: 0 0 0 3px #F26B30, 0 6px 18px rgba(242, 107, 48, 0.22);
+        }
+        100% {
+          background-color: transparent;
+          box-shadow: none;
+          transform: translateY(0);
+        }
+      }
+      .item.highlight-deal {
+        animation: dealGlow 2s cubic-bezier(0.16, 1, 0.3, 1);
+        border-radius: var(--radius-md);
+        position: relative;
+        z-index: 5;
+      }
+      .variants.pulsing .variant {
+        animation: variantPulse 0.5s ease-in-out 2;
+      }
+      @keyframes variantPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.06); border-color: var(--primary); }
+      }
       .item-info { flex: 1; min-width: 0; }
       .item-name {
         font-family: "Poppins", sans-serif;
@@ -1200,7 +1229,7 @@
       /* ===== Menu data — transcribed from the in-store menu (workspace/restaurant/menu.md) ===== */
       var MENU = [
         { id: "offers", title: "Special & Weekly Offers", note: "Limited time: Burger Buy 1 Get 1 is live Oct 29 – Nov 4! Chaotic Sunday unlocks on Sundays, Taco Twisttday on Tuesdays (Dhaka time). Everything Fried platter is on every day.", items: [
-          { id: "b1g1-burger", name: "Burger Buy 1 Get 1", badge: "Oct 29 – Nov 4", startDate: "2026-10-29", endDate: "2026-11-04", desc: "Limited-time offer (Oct 29 to Nov 4th): Buy 1 Get 1 free on selected burgers! Choose your burger below.", variants: [ { label: "The Classic Burger", price: 239 }, { label: "The Classic with Cheese", price: 259 }, { label: "Smoky BBQ Cheese", price: 279 }, { label: "Classic Crispy Chicken", price: 289 }, { label: "The Bacon Classic", price: 289 }, { label: "Hot Cheese Beef", price: 309 } ] },
+          { id: "b1g1-burger", name: "Burger Buy 1 Get 1", badge: "Oct 29 – Nov 4", startDate: "2026-10-29", endDate: "2026-11-04", desc: "Buy 1 Get 1 Free (Oct 29 – Nov 4): Two burgers for the price of one! Tap any burger below to pick your option, then tap + to add to order.", variants: [ { label: "The Classic Burger", price: 239 }, { label: "The Classic with Cheese", price: 259 }, { label: "Smoky BBQ Cheese", price: 279 }, { label: "Classic Crispy Chicken", price: 289 }, { label: "The Bacon Classic", price: 289 }, { label: "Hot Cheese Beef", price: 309 } ] },
           { id: "taco-tuesday", name: "Taco Twisttday — Taco", badge: "Tuesdays only", day: 2, desc: "Tuesday deal: a taco for ৳99. Tuesdays only.", price: 99 },
           { id: "chaotic-sunday", name: "Chaotic Sunday — 4 Burgers", badge: "Sundays only", day: 0, desc: "Sunday deal: 4 burgers for ৳799. Sundays only.", price: 799 },
           { id: "everything-fried", name: "Everything Fried Platter", desc: "Wings, fries, strips, wedges, crispy chicken and dips — the full fried lineup on one tray.", price: 999 }
@@ -1387,6 +1416,7 @@
           if (item.variants) selVariant[item.id] = 0;
           var row = document.createElement("div");
           row.className = "item";
+          row.id = "item-" + item.id;
           row.setAttribute("data-name", (item.name + " " + cat.title).toLowerCase());
           if (item.day !== undefined && !offerLive(item)) row.classList.add("locked");
 
@@ -1538,12 +1568,26 @@
         bar.appendChild(top);
 
         var rec = { card: card, countEl: null, minusEl: null, item: item };
+        var isBurgerChoiceDeal = (o.id === "b1g1-burger" || (item.variants && item.variants.length > 0));
+        if (isBurgerChoiceDeal) {
+          ttl.style.cursor = "pointer";
+          ttl.addEventListener("click", scrollToBurgerSelection);
+        }
+
         if (live) {
           var add = document.createElement("button");
           add.type = "button";
           add.className = "offer-add";
-          add.textContent = "Add to Order";
-          add.addEventListener("click", function () { pulseBtn(add); changeQty(item, 1); });
+          add.textContent = isBurgerChoiceDeal ? "Choose Burger →" : "Add to Order";
+          add.addEventListener("click", function () {
+            if (isBurgerChoiceDeal) {
+              pulseBtn(add);
+              scrollToBurgerSelection();
+            } else {
+              pulseBtn(add);
+              changeQty(item, 1);
+            }
+          });
           bar.appendChild(add);
 
           var st = document.createElement("div");
@@ -1555,7 +1599,15 @@
           var pl = document.createElement("button");
           pl.type = "button"; pl.className = "plus"; pl.textContent = "+"; pl.setAttribute("aria-label", "Add one");
           mn.addEventListener("click", function () { changeQty(item, -1); });
-          pl.addEventListener("click", function () { pulseBtn(pl); changeQty(item, 1); });
+          pl.addEventListener("click", function () {
+            if (isBurgerChoiceDeal) {
+              pulseBtn(pl);
+              scrollToBurgerSelection();
+            } else {
+              pulseBtn(pl);
+              changeQty(item, 1);
+            }
+          });
           st.appendChild(mn); st.appendChild(ct); st.appendChild(pl);
           bar.appendChild(st);
           rec.countEl = ct; rec.minusEl = mn;
@@ -1596,6 +1648,31 @@
       var posterClose = document.getElementById("posterClose");
       var currentPosterItem = null;
 
+      function scrollToBurgerSelection() {
+        var el = document.getElementById("item-b1g1-burger");
+        if (!el) el = document.getElementById("cat-offers");
+        if (!el) return;
+
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        el.classList.remove("highlight-deal");
+        void el.offsetWidth;
+        el.classList.add("highlight-deal");
+
+        var vg = el.querySelector(".variants");
+        if (vg) {
+          vg.classList.remove("pulsing");
+          void vg.offsetWidth;
+          vg.classList.add("pulsing");
+        }
+
+        if (el._plusEl) {
+          setTimeout(function () {
+            pulseBtn(el._plusEl);
+          }, 450);
+        }
+      }
+
       function openPoster(o) {
         var item = itemById[o.id];
         currentPosterItem = item;
@@ -1605,6 +1682,7 @@
         posterSub.textContent = o.sub;
         var live = offerLive(item);
         posterAddBtn.style.display = live ? "block" : "none";
+        posterAddBtn.textContent = (item && item.id === "b1g1-burger") ? "Choose Burger →" : "Add to Order";
         posterOverlay.classList.add("open");
       }
       function closePoster() {
@@ -1618,8 +1696,13 @@
       posterAddBtn.addEventListener("click", function () {
         if (currentPosterItem) {
           pulseBtn(posterAddBtn);
-          changeQty(currentPosterItem, 1);
-          closePoster();
+          if (currentPosterItem.id === "b1g1-burger") {
+            closePoster();
+            scrollToBurgerSelection();
+          } else {
+            changeQty(currentPosterItem, 1);
+            closePoster();
+          }
         }
       });
       refreshOffers();
