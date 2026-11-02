@@ -1475,7 +1475,7 @@
         { id: "shakes", title: "Coffee & Shakes", note: "Sizes S / L where shown.", items: [
           { id: "choc-coffee", name: "Chocolate Cold Coffee", variants: [ { label: "S", price: 109 }, { label: "L", price: 159 } ] },
           { id: "creamy-strawberry", name: "Creamy Strawberry", variants: [ { label: "S", price: 129 }, { label: "L", price: 169 } ] },
-          { id: "oreo-shake", name: "Oreo Shake", variants: [ { label: "S", price: 139 }, { label: "L", price: 189 } ] },
+          { id: "oreo-shake", name: "Oreo Shake", price: 189 },
           { id: "nutella-shake", name: "Nutella Shake", price: 209 },
           { id: "snickers-shake", name: "Snickers Shake", price: 199 },
           { id: "lemon-soda", name: "Tangy Lemon Soda", price: 159 },
@@ -2211,7 +2211,7 @@
 
       /* ===== Shake reminder upsell logic ===== */
       var SHAKE_SUGGESTIONS = [
-        { id: "oreo-shake", name: "Oreo Shake", variantLabel: "S", variantIdx: 0, price: 139, icon: "🍪" },
+        { id: "oreo-shake", name: "Oreo Shake", variantLabel: "", variantIdx: 0, price: 189, icon: "🍪" },
         { id: "nutella-shake", name: "Nutella Shake", variantLabel: "", variantIdx: 0, price: 209, icon: "🍫" },
         { id: "snickers-shake", name: "Snickers Shake", variantLabel: "", variantIdx: 0, price: 199, icon: "🥜" },
         { id: "creamy-strawberry", name: "Creamy Strawberry", variantLabel: "S", variantIdx: 0, price: 129, icon: "🍓" }
